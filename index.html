@@ -202,7 +202,6 @@
       margin-top: 18px;
     }
 
-    /* email-link színe örökölje a footer színét, ne legyen kék */
     .footer a {
       color: inherit;
       text-decoration: none;
@@ -246,15 +245,17 @@
 
       <div class="video-container">
         <div style="padding:56.25% 0 0 0;position:relative;">
-          <!-- Vimeo iframe: NINCS autoplay, NINCS muted, a JS indítja el kattintásra -->
+
+          <!-- YouTube iframe Vimeo helyett -->
           <iframe
             id="fuseVideo"
-            src="https://player.vimeo.com/video/1144824068?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
+            src="https://www.youtube.com/embed/VFm9Wwy4-y8?si=4v8TXZLuT8e0SZL6&amp;controls=0"
+            title="FuseBank videó"
             frameborder="0"
-            allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             referrerpolicy="strict-origin-when-cross-origin"
-            style="position:absolute;top:0;left:0;width:100%;height:100%;"
-            title="">
+            allowfullscreen
+            style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;border-radius:12px;">
           </iframe>
 
           <!-- Overlay gomb, ami play + hanggal indít -->
@@ -283,26 +284,30 @@
     </div>
   </div>
 
-  <!-- Vimeo API -->
-  <script src="https://player.vimeo.com/api/player.js"></script>
+  <!-- YouTube IFrame API -->
+  <script src="https://www.youtube.com/iframe_api"></script>
   <script>
+    var ytPlayer;
+
+    function onYouTubeIframeAPIReady() {
+      ytPlayer = new YT.Player('fuseVideo', {
+        events: {
+          'onReady': function (event) {
+            // semmi, a kattintás fogja indítani
+          }
+        }
+      });
+    }
+
     document.addEventListener('DOMContentLoaded', function () {
-      var iframe = document.getElementById('fuseVideo');
       var overlay = document.getElementById('videoOverlay');
 
-      if (!iframe || !overlay || typeof Vimeo === 'undefined') return;
+      if (!overlay) return;
 
-      // Vimeo Player példány
-      var player = new Vimeo.Player(iframe);
-
-      // Overlay kattintásra: play + hangerő fel, overlay eltűnik
       overlay.addEventListener('click', function () {
-        player.setVolume(1).then(function () {
-          return player.play();
-        }).catch(function (error) {
-          console.warn('Vimeo play error:', error);
-        });
-
+        if (ytPlayer && typeof ytPlayer.playVideo === 'function') {
+          ytPlayer.playVideo();
+        }
         overlay.classList.add('hidden');
       });
     });
