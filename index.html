@@ -51,7 +51,7 @@
     }
 
     .logo img {
-      max-width: 160px;
+      max-width: 190px; /* nagyobb logo */
       height: auto;
       display: block;
       margin: 0 auto;
@@ -123,7 +123,7 @@
       border-radius: 12px;
     }
 
-    /* Középső overlay play gomb */
+    /* Középső overlay play gomb – nagyobb, feltűnőbb */
     .video-overlay {
       position: absolute;
       inset: 0;
@@ -149,20 +149,20 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 8px;
-      padding: 10px 18px;
+      gap: 10px;
+      padding: 14px 26px; /* szélesebb és magasabb gomb */
       border-radius: 999px;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(148, 163, 184, 0.7);
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(148, 163, 184, 0.85);
       color: #e5e7eb;
-      font-size: 14px;
+      font-size: 15px;
       font-weight: 500;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.8);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.85);
     }
 
     .video-overlay-icon {
-      width: 32px;
-      height: 32px;
+      width: 40px;
+      height: 40px;
       border-radius: 999px;
       background: #22c55e;
       display: flex;
@@ -171,8 +171,8 @@
     }
 
     .video-overlay-icon svg {
-      width: 16px;
-      height: 16px;
+      width: 18px;
+      height: 18px;
       fill: #020617;
     }
 
@@ -246,7 +246,7 @@
       <div class="video-container">
         <div style="padding:56.25% 0 0 0;position:relative;">
 
-          <!-- YouTube iframe: nincs autoplay, nincs mute, JS indítja kattintásra -->
+          <!-- YouTube iframe -->
           <iframe
             id="fuseVideo"
             src="https://www.youtube.com/embed/VFm9Wwy4-y8?si=4v8TXZLuT8e0SZL6&amp;controls=0&amp;enablejsapi=1"
@@ -258,7 +258,7 @@
             style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;border-radius:12px;">
           </iframe>
 
-          <!-- Középen lévő overlay play gomb -->
+          <!-- Középen lévő nagyobb overlay play gomb -->
           <div class="video-overlay" id="videoOverlay">
             <div class="video-overlay-button">
               <div class="video-overlay-icon">
