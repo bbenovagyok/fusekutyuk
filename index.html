@@ -184,7 +184,7 @@
       <h1>Köszönjük a vásárlást!</h1>
 
       <p class="subtitle">
-        Mielőtt elteszed a telefont, nézd meg ezt a rövid videót a
+        Nézd meg ezt a rövid videót a
         <span class="highlight"><a href="https://fusekutyuk.hu/products/fusebank" target="_blank">mágneses FuseBank™ powerbank</a></span>
         elméleti és gyakorlati működéséről.
       </p>
@@ -204,11 +204,6 @@
         a nagyobb képért.
       </p>
 
-      <p class="cta-note">
-        A videóban bemutatjuk, hogyan tedd fel biztonságosan a telefonodra,
-        mennyi ideig bírja, és hogyan töltsd a FuseBank™-et a leghatékonyabban.
-      </p>
-
       <div class="footer">
         Ha bármi kérdésed van, írj nekünk: fusekutyuk@gmail.com
       </div>
@@ -221,7 +216,6 @@
       const iframe = document.getElementById('videoFrame');
       if (iframe) {
         // Google Drive iframe-hez az autoplay csak a src-ben működik
-        // Próbálunk egy alternatív metódussal az autoplay-t kényszerítés alkal szépszícével
         iframe.src = iframe.src + (iframe.src.includes('?') ? '&' : '?') + 'autoplay=1';
       }
     }, 500);
