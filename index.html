@@ -11,6 +11,10 @@
       padding: 0;
     }
 
+    html, body {
+      height: 100%;
+    }
+
     body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
         sans-serif;
@@ -20,30 +24,34 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 8px;
+      padding: 0;
+      margin: 0;
     }
 
     .page-wrap {
       width: 100%;
-      max-width: 480px;
+      max-width: 540px;
+      height: auto;
       margin: 0 auto;
+      padding: 12px 0;
     }
 
     .card {
       background: #020617;
       border-radius: 16px;
-      padding: 24px 18px 28px;
+      padding: 28px 18px 32px;
       box-shadow: 0 18px 45px rgba(15, 23, 42, 0.8);
       border: 1px solid rgba(148, 163, 184, 0.25);
+      margin: 0 12px;
     }
 
     .logo {
       text-align: center;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
     }
 
     .logo img {
-      max-width: 150px;
+      max-width: 160px;
       height: auto;
       display: block;
       margin: 0 auto;
@@ -58,23 +66,23 @@
       border-radius: 999px;
       background: rgba(34, 197, 94, 0.12);
       color: #22c55e;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
     }
 
     h1 {
-      font-size: 28px;
+      font-size: 30px;
       line-height: 1.3;
       text-align: center;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
       font-weight: 700;
     }
 
     .subtitle {
-      font-size: 16px;
-      line-height: 1.5;
+      font-size: 17px;
+      line-height: 1.6;
       text-align: center;
       color: #cbd5f5;
-      margin-bottom: 20px;
+      margin-bottom: 22px;
     }
 
     .highlight {
@@ -102,7 +110,7 @@
       border: 1px solid rgba(148, 163, 184, 0.4);
       box-shadow: 0 12px 35px rgba(15, 23, 42, 0.8);
       background: #020617;
-      margin-bottom: 18px;
+      margin-bottom: 20px;
     }
 
     .video-container iframe {
@@ -130,11 +138,11 @@
     }
 
     .cta-note {
-      font-size: 13px;
-      line-height: 1.4;
+      font-size: 14px;
+      line-height: 1.5;
       text-align: center;
       color: #e5e7eb;
-      margin-top: 10px;
+      margin-top: 12px;
     }
 
     .cta-note strong {
@@ -146,20 +154,21 @@
       font-size: 11px;
       text-align: center;
       color: #6b7280;
-      margin-top: 16px;
+      margin-top: 18px;
     }
 
     @media (max-width: 480px) {
       .card {
-        padding: 20px 14px 24px;
+        padding: 24px 14px 28px;
+        margin: 0 8px;
       }
 
       h1 {
-        font-size: 26px;
+        font-size: 28px;
       }
 
       .subtitle {
-        font-size: 15px;
+        font-size: 16px;
       }
     }
   </style>
@@ -182,7 +191,8 @@
 
       <div class="video-container">
         <iframe
-          src="https://drive.google.com/file/d/1dw1uhB6yx7H1Co9kNrAJkHfeoG3C3xhb/preview?autoplay=1"
+          id="videoFrame"
+          src="https://drive.google.com/file/d/1dw1uhB6yx7H1Co9kNrAJkHfeoG3C3xhb/preview"
           title="FuseBank mágneses powerbank – használati útmutató"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           allowfullscreen
@@ -204,5 +214,17 @@
       </div>
     </div>
   </div>
+
+  <script>
+    // Google Drive videó autoplay kezelése
+    setTimeout(function() {
+      const iframe = document.getElementById('videoFrame');
+      if (iframe) {
+        // Google Drive iframe-hez az autoplay csak a src-ben működik
+        // Próbálunk egy alternatív metódussal az autoplay-t kényszerítés alkal szépszícével
+        iframe.src = iframe.src + (iframe.src.includes('?') ? '&' : '?') + 'autoplay=1';
+      }
+    }, 500);
+  </script>
 </body>
 </html>
