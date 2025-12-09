@@ -202,9 +202,28 @@
       margin-top: 18px;
     }
 
+    /* footer email link színe örökölje a szöveg színét, ne legyen kék */
+    .footer a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
     @media (max-width: 480px) {
+      body {
+        /* kevesebb “légpárna” mobilon felül-alul */
+        align-items: stretch;
+      }
+
+      .page-wrap {
+        padding: 0;
+      }
+
       .card {
-        padding: 24px 14px 28px;
+        padding: 20px 14px 24px;
         margin: 0 8px;
       }
 
@@ -282,10 +301,8 @@
 
       if (!iframe || !overlay || typeof Vimeo === 'undefined') return;
 
-      // Vimeo Player példány
       var player = new Vimeo.Player(iframe);
 
-      // Overlay kattintásra: play + hangerő fel, overlay eltűnik
       overlay.addEventListener('click', function () {
         player.setVolume(1).then(function () {
           return player.play();
