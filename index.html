@@ -39,12 +39,14 @@
 
     .logo {
       text-align: center;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      font-size: 14px;
-      text-transform: uppercase;
-      color: #e5e7eb;
       margin-bottom: 8px;
+    }
+
+    .logo img {
+      max-width: 150px;
+      height: auto;
+      display: block;
+      margin: 0 auto;
     }
 
     .badge {
@@ -54,8 +56,8 @@
       text-transform: uppercase;
       padding: 4px 10px;
       border-radius: 999px;
-      background: rgba(56, 189, 248, 0.12);
-      color: #38bdf8;
+      background: rgba(34, 197, 94, 0.12);
+      color: #22c55e;
       margin-bottom: 10px;
     }
 
@@ -77,6 +79,17 @@
     .highlight {
       color: #38bdf8;
       font-weight: 600;
+    }
+
+    .highlight a {
+      color: #38bdf8;
+      text-decoration: underline;
+      cursor: pointer;
+      transition: opacity 0.2s ease;
+    }
+
+    .highlight a:hover {
+      opacity: 0.8;
     }
 
     .video-container {
@@ -107,6 +120,7 @@
       color: #9ca3af;
       text-align: center;
       margin-bottom: 12px;
+      display: none;
     }
 
     .tip span {
@@ -152,14 +166,16 @@
 <body>
   <div class="page-wrap">
     <div class="card">
-      <div class="logo">FuseKütyük</div>
+      <div class="logo">
+        <img src="https://i.postimg.cc/5ttHXs8R/fusekutyuk.png" alt="FuseKütyük" />
+      </div>
       <div class="badge">Rendelésed úton van</div>
 
       <h1>Köszönjük a vásárlást!</h1>
 
       <p class="subtitle">
         Mielőtt elteszed a telefont, nézd meg ezt a rövid videót a
-        <span class="highlight">mágneses FuseBank™ powerbank</span>
+        <span class="highlight"><a href="https://fusekutyuk.hu/products/fusebank" target="_blank">mágneses FuseBank™ powerbank</a></span>
         elméleti és gyakorlati működéséről.
       </p>
 
@@ -187,5 +203,15 @@
       </div>
     </div>
   </div>
+
+  <script>
+    // A videó automatikus indítása megnyitáskor
+    window.addEventListener('load', function() {
+      const iframe = document.querySelector('.video-container iframe');
+      if (iframe) {
+        iframe.src = iframe.src + '?autoplay=1';
+      }
+    });
+  </script>
 </body>
 </html>
