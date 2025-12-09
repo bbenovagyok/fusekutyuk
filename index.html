@@ -202,6 +202,16 @@
       margin-top: 18px;
     }
 
+    /* email-link színe örökölje a footer színét, ne legyen kék */
+    .footer a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
     @media (max-width: 480px) {
       .card {
         padding: 24px 14px 28px;
@@ -244,7 +254,7 @@
             allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
             referrerpolicy="strict-origin-when-cross-origin"
             style="position:absolute;top:0;left:0;width:100%;height:100%;"
-            title="A Mágneses Powerbankokról röviden">
+            title="">
           </iframe>
 
           <!-- Overlay gomb, ami play + hanggal indít -->
@@ -255,8 +265,8 @@
                   <path d="M8 5v14l11-7z"></path>
                 </svg>
               </div>
-              <div>Lejátszás hanggal</div>
-              <div class="video-overlay-text-small">Kattints ide a videó elindításához</div>
+              <div>Lejátszás</div>
+              <div class="video-overlay-text-small"></div>
             </div>
           </div>
         </div>
