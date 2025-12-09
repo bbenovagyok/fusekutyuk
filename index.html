@@ -123,6 +123,64 @@
       border-radius: 12px;
     }
 
+    /* Overlay play gomb */
+    .video-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at center, rgba(15,23,42,0.0), rgba(15,23,42,0.65));
+      cursor: pointer;
+      z-index: 2;
+      transition: background 0.2s ease, opacity 0.2s ease;
+    }
+
+    .video-overlay:hover {
+      background: radial-gradient(circle at center, rgba(15,23,42,0.0), rgba(15,23,42,0.8));
+    }
+
+    .video-overlay.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .video-overlay-button {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      color: #e5e7eb;
+      font-size: 14px;
+      font-weight: 500;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.8);
+    }
+
+    .video-overlay-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      background: #22c55e;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .video-overlay-icon svg {
+      width: 16px;
+      height: 16px;
+      fill: #020617;
+    }
+
+    .video-overlay-text-small {
+      font-size: 12px;
+      color: #9ca3af;
+    }
+
     .tip {
       font-size: 12px;
       line-height: 1.5;
@@ -135,19 +193,6 @@
     .tip span {
       color: #e5e7eb;
       font-weight: 500;
-    }
-
-    .cta-note {
-      font-size: 14px;
-      line-height: 1.5;
-      text-align: center;
-      color: #e5e7eb;
-      margin-top: 12px;
-    }
-
-    .cta-note strong {
-      color: #38bdf8;
-      font-weight: 600;
     }
 
     .footer {
@@ -191,16 +236,30 @@
 
       <div class="video-container">
         <div style="padding:56.25% 0 0 0;position:relative;">
+          <!-- Vimeo iframe: NINCS autoplay, NINCS muted, a JS indítja el kattintásra -->
           <iframe
-            src="https://player.vimeo.com/video/1144824068?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;autoplay=1&amp;muted=1"
+            id="fuseVideo"
+            src="https://player.vimeo.com/video/1144824068?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
             frameborder="0"
             allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
             referrerpolicy="strict-origin-when-cross-origin"
             style="position:absolute;top:0;left:0;width:100%;height:100%;"
             title="A Mágneses Powerbankokról röviden">
           </iframe>
+
+          <!-- Overlay gomb, ami play + hanggal indít -->
+          <div class="video-overlay" id="videoOverlay">
+            <div class="video-overlay-button">
+              <div class="video-overlay-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M8 5v14l11-7z"></path>
+                </svg>
+              </div>
+              <div>Lejátszás hanggal</div>
+              <div class="video-overlay-text-small">Kattints ide a videó elindításához</div>
+            </div>
+          </div>
         </div>
-        <script src="https://player.vimeo.com/api/player.js"></script>
       </div>
 
       <p class="tip">
@@ -213,5 +272,30 @@
       </div>
     </div>
   </div>
+
+  <!-- Vimeo API -->
+  <script src="https://player.vimeo.com/api/player.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var iframe = document.getElementById('fuseVideo');
+      var overlay = document.getElementById('videoOverlay');
+
+      if (!iframe || !overlay || typeof Vimeo === 'undefined') return;
+
+      // Vimeo Player példány
+      var player = new Vimeo.Player(iframe);
+
+      // Overlay kattintásra: play + hangerő fel, overlay eltűnik
+      overlay.addEventListener('click', function () {
+        player.setVolume(1).then(function () {
+          return player.play();
+        }).catch(function (error) {
+          console.warn('Vimeo play error:', error);
+        });
+
+        overlay.classList.add('hidden');
+      });
+    });
+  </script>
 </body>
 </html>
